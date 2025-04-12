@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番茄时钟</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .pomodoro {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .start {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pause {
+            background-color: #FFA726;
+            color: white;
+        }
+
+        .reset {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .time-select {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .time-btn {
+            padding: 8px 15px;
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            background: none;
+            color: #4CAF50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-btn.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .time-btn:hover {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .custom-time {
+            margin-top: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .custom-time input {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+
+        .progress-ring__circle {
+            transition: 0.35s stroke-dashoffset;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        h2 {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="pomodoro">
+        <h2>番茄时钟</h2>
+        
+        <div class="time-select">
+            <button class="time-btn active" data-time="1500">25分钟</button>
+            <button class="time-btn" data-time="900">15分钟</button>
+            <button class="time-btn" data-time="300">5分钟</button>
+        </div>
+
+        <div class="custom-time">
+            自定义时间：
+            <input type="number" id="minutes" min="1" max="60" value="25"> 分钟
+        </div>
+
+        <div class="progress-ring">
+            <svg width="200" height="200">
+                <circle class="progress-ring__circle" 
+                        stroke="#ddd"
+                        stroke-width="8"
+                        fill="transparent"
+                        r="90"
+                        cx="100"
+                        cy="100"/>
+                <circle class="progress-ring__circle progress"
+                        stroke="#4CAF50"
+                        stroke-width="8"
+                        fill="transparent"
+                        r="90"
+                        cx="100"
+                        cy="100"/>
+            </svg>
+            <div class="timer" id="timer">25:00</div>
+        </div>
+
+        <div class="controls">
+            <button class="btn start" id="startBtn">开始</button>
+            <button class="btn reset" id="resetBtn">重置</button>
+        </div>
+    </div>
+        <script src="popup.js"></script>
+</body>
+</html>
